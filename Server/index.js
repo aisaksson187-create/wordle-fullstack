@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import { getFeedback } from "./game.js";
+import { getRandomWord } from "./words.js";
 
 const app = express();
 const PORT = 5080;
@@ -13,22 +15,6 @@ function createGameId() {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
-function getFeedback(secretWord, guess) {
-  const result = [];
-
-  for (let i = 0; i < guess.length; i++) {
-    if (guess[i] === secretWord[i]) {
-      result.push("correct");
-    } else if (secretWord.includes(guess[i])) {
-      result.push("misplaced");
-    } else {
-      result.push("incorrect");
-    }
-  }
-
-  return result;
-}
-
 app.get("/api/hello", (req, res) => {
   res.json({ message: "Hej från servern!" });
 });
@@ -40,11 +26,11 @@ app.post("/api/game/start", (req, res) => {
     return res.status(400).json({ error: "Ogiltig ordlängd" });
   }
 
-  let secretWord = "apple";
+  const secretWord = getRandomWord(wordLength, allowDuplicates);
 
-  if (wordLength === 4) secretWord = "book";
-  if (wordLength === 5) secretWord = "apple";
-  if (wordLength === 6) secretWord = "planet";
+  if (!secretWord) {
+    return res.status(400).json({ error: "Det finns inga ord som matchar de inställningarna" });
+  }
 
   const gameId = createGameId();
 
