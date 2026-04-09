@@ -1,17 +1,18 @@
-const words = [
-  "book",
-  "tree",
-  "game",
-  "milk",
-  "fish",
-  "apple",
-  "grape",
-  "chair",
-  "planet",
-  "winter",
-  "school",
-  "market"
-];
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const filePath = path.join(__dirname, "data", "words.txt");
+
+const words = fs
+  .readFileSync(filePath, "utf-8")
+  .split("\n")
+  .map((word) => word.trim().toLowerCase())
+  .filter((word) => word.length > 0)
+  .filter((word) => /^[a-z]+$/.test(word));
 
 function hasUniqueLetters(word) {
   return new Set(word).size === word.length;
