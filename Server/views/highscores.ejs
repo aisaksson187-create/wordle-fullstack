@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Highscores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    nav {
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      margin-right: 12px;
+      text-decoration: none;
+      color: blue;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f3f3f3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Highscore-lista</h1>
+
+  <nav>
+    <a href="/">Startsida</a>
+  </nav>
+
+  <% if (highscores.length === 0) { %>
+    <p>Inga highscores sparade ännu.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Placering</th>
+          <th>Namn</th>
+          <th>Tid (ms)</th>
+          <th>Ord-längd</th>
+          <th>Upprepade bokstäver</th>
+          <th>Gissningar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% highscores.forEach((score, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= score.name %></td>
+            <td><%= score.duration_ms %></td>
+            <td><%= score.word_length %></td>
+            <td><%= score.allow_duplicates ? "Ja" : "Nej" %></td>
+            <td><%= score.guesses.join(", ") %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</body>
+</html>
