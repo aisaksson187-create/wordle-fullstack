@@ -8,7 +8,7 @@ export default function App() {
       <nav style={{ padding: "1rem 2rem", borderBottom: "1px solid #ccc" }}>
         <Link to="/" style={{ marginRight: "1rem" }}>Spela</Link>
         <Link to="/about" style={{ marginRight: "1rem" }}>Om projektet</Link>
-        <a href="http://localhost:5080/highscores">Highscores</a>
+        <a href="/highscores">Highscores</a>
       </nav>
 
       <Routes>

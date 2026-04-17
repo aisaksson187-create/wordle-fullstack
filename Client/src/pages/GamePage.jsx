@@ -13,7 +13,7 @@ export default function GamePage() {
   async function startGame(e) {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5080/api/game/start", {
+    const response = await fetch("/api/game/start", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -42,7 +42,7 @@ export default function GamePage() {
   async function submitGuess(e) {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5080/api/game/guess", {
+    const response = await fetch("/api/game/guess", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -74,7 +74,7 @@ export default function GamePage() {
   async function saveHighscore(e) {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5080/api/highscores", {
+    const response = await fetch("/api/highscores", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -104,10 +104,10 @@ export default function GamePage() {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
-      <h1>Wordle fullstack</h1>
+      <h1>Wordle</h1>
 
       <p>
-        <a href="http://localhost:5080/highscores">Visa highscores</a>
+        <a href="/highscores">Visa highscores</a>
       </p>
 
       <form onSubmit={startGame} style={{ marginBottom: "2rem" }}>
