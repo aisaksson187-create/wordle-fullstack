@@ -8,6 +8,7 @@ import { saveHighscore, getHighscores } from "./db.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const clientDistPath = path.join(__dirname, "../client/dist");
 
 const app = express();
 const PORT = 5080;
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static(clientDistPath));
 
 const games = new Map();
 
@@ -163,6 +165,10 @@ app.get("/highscores", async (req, res) => {
   } catch (error) {
     res.status(500).send("Kunde inte hämta highscores");
   }
+});
+
+app.get("/{*any}", (req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"));
 });
 
 app.listen(PORT, () => {
