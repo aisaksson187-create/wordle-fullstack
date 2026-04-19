@@ -4,11 +4,11 @@ import AboutPage from "./pages/AboutPage";
 
 export default function App() {
   return (
-    <div className="page">
-      <nav className="top-nav">
-        <Link to="/" className="nav-link">Spela</Link>
-        <Link to="/about" className="nav-link">Om projektet</Link>
-        <a href="/highscores" className="nav-link">Highscores</a>
+    <div style={{ fontFamily: "Arial" }}>
+      <nav style={{ padding: "1rem 2rem", borderBottom: "1px solid #ccc" }}>
+        <Link to="/" style={{ marginRight: "1rem" }}>Spela</Link>
+        <Link to="/about" style={{ marginRight: "1rem" }}>Om projektet</Link>
+        <a href="/highscores">Highscores</a>
       </nav>
 
       <Routes>
